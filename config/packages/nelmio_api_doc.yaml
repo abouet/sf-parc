@@ -1,0 +1,77 @@
+nelmio_api_doc:
+    documentation:
+        servers:
+            dev:
+                url: 'https://%api.host%'
+                description: Development server
+        info:
+            title: sf-parc
+            version: '%app.version%'
+            description: >-
+              This is an example of using OAuth2 Access Code Flow in a specification to
+              describe security to your API.
+            termsOfService: Terms of Service URL
+            contact:
+              name: sf-parc
+              email: contact@sf-parc.org
+              url: http://www.sf-parc.org/contact
+            license:
+              name: MIT
+              url: https://mit-license.org/
+        externalDocs:
+                description: Hypermedia as the Engine of Application State (HATEOAS)
+                url: https://en.wikipedia.org/wiki/HATEOAS
+#                graphQL:
+#                    description: graph QL
+#                    url: https://graphql.org/
+#                json-ld:
+#                    description: JSON-LD along with the Hydra Core Vocabulary
+#                    url: https://json-ld.org/
+#                open-api:
+#                    description: OpenAPI v3.0.3
+#                    url: http://spec.openapis.org/oas/v3.0.3
+#                json-api:
+#                    description: JSON:API
+#                    url: https://jsonapi.org/
+#                HAL:
+#                    description: HAL
+#                    url: http://stateless.co/hal_specification.html
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        security:
+            - Bearer: []
+    areas:
+        default:
+            path_patterns: [ ^/doc ]
+            host_patterns: [ ^doc\. ]
+        activity:
+            path_patterns: [ ^/activity ]
+        company:
+            path_patterns: [ ^/company ]
+        hardware:
+            path_patterns: [ ^/hardware ]
+            documentation:
+                info: toto hardware
+        helpdesk:
+            path_patterns: [ ^/helpdesk ]
+        person:
+            path_patterns: [ ^/person ]
+        plateform:
+            path_patterns: [ ^/plateform ]
+        software:
+            path_patterns: [ ^/software ]
+        application:
+            path_patterns: [ ^/application ]
+#            host_patterns: {  }
+#            with_annotation: false
+#            documentation:
+#                title: Hardware
+#                description: description du namespace
+#            name_patterns: {  }
+    media_types:
+        - json
+        - xml

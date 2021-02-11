@@ -1,0 +1,41 @@
+fos_rest:
+    param_fetcher_listener: true
+    allowed_methods_listener:  true
+    disable_csrf_role: ROLE_API
+    body_converter:
+        enabled: true
+        validate: true
+        validation_errors_argument: violations
+    view:
+        view_response_listener: true
+        formats:
+            json: true
+            xml: true
+        failed_validation: HTTP_BAD_REQUEST
+        mime_types:
+            json: ['application/json', 'application/json;version=1.0']
+    serializer:
+        serialize_null: true
+    format_listener:
+        enabled: true
+        rules:
+            - { path: ^/, prefer_extension: false, fallback_format: json, priorities: ['json', 'xml'] }
+    exception:
+        enabled: true 
+        codes:
+            \LogicException: 500
+            \InvalidArgumentException: 400
+            Symfony\Component\Security\Core\Exception\LogicException: 500
+            Symfony\Component\Security\Core\Exception\BadCredentialsException: 401
+            Symfony\Component\Security\Core\Exception\AccessDeniedException: 403
+            Doctrine\ODM\MongoDB\DocumentNotFoundException: 404
+#            Doctrine\DBAL\Exception\UniqueConstraintViolationException: 500
+        messages:
+            Doctrine\ODM\MongoDB\DocumentNotFoundException: true
+#            Doctrine\DBAL\Exception\UniqueConstraintViolationException: true
+            \LogicException: true
+            \InvalidArgumentException: true
+            Symfony\Component\Security\Core\Exception\LogicException: true
+    versioning:
+        enabled: true
+        default_version: '%env(resolve:APP_API_VERSION)%'

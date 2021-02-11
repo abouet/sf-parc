@@ -1,0 +1,64 @@
+// Colors
+$navy:        #3f5872; // Bootstrap default
+$green:       #64ba57;
+$light-green: #b8dd28;
+$red:         #e01d1e; //#ED6A5A
+$blue-grey:   #BDCCDA;
+
+$methods: (
+"get": #3CAAB5,
+"post": $green,
+"patch": #50e3c2,
+"put": #E6C229,
+"delete": $red
+);
+
+@mixin method-color($method, $color) {
+    &.opblock-#{$method}{ 
+        .opblock-summary {
+            border-color: darken($color, 10%);
+        }
+        .opblock-summary-method {
+            background: $color;
+        }
+    }
+}
+
+body{
+    color: $navy;
+}
+
+header{
+    &:before {
+        background-color: $green;
+    }
+    #logo{
+        img {
+            height: 48px;
+            background-color: transparent;
+        }
+    }
+}
+
+#swagger-ui{
+    .info{
+        .title{
+            small.version-stamp {
+                background-color: $green;
+            }
+        }
+    }
+    &.api-platform{
+        .info{
+            .title {
+                color: $green;
+            }
+        }
+        .opblock{
+            @each $method, $color in $methods {
+                @include method-color($method, $color);
+            }
+        }
+    }
+}
+

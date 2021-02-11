@@ -1,0 +1,35 @@
+body {
+  color: #3f5872; }
+
+header:before {
+  background-color: #64ba57; }
+header #logo img {
+  height: 48px;
+  background-color: transparent; }
+
+#swagger-ui .info .title small.version-stamp {
+  background-color: #64ba57; }
+#swagger-ui.api-platform .info .title {
+  color: #64ba57; }
+#swagger-ui.api-platform .opblock.opblock-get .opblock-summary {
+  border-color: #2f868f; }
+#swagger-ui.api-platform .opblock.opblock-get .opblock-summary-method {
+  background: #3CAAB5; }
+#swagger-ui.api-platform .opblock.opblock-post .opblock-summary {
+  border-color: #4d9d41; }
+#swagger-ui.api-platform .opblock.opblock-post .opblock-summary-method {
+  background: #64ba57; }
+#swagger-ui.api-platform .opblock.opblock-patch .opblock-summary {
+  border-color: #24dcb3; }
+#swagger-ui.api-platform .opblock.opblock-patch .opblock-summary-method {
+  background: #50e3c2; }
+#swagger-ui.api-platform .opblock.opblock-put .opblock-summary {
+  border-color: #c5a417; }
+#swagger-ui.api-platform .opblock.opblock-put .opblock-summary-method {
+  background: #E6C229; }
+#swagger-ui.api-platform .opblock.opblock-delete .opblock-summary {
+  border-color: #b31718; }
+#swagger-ui.api-platform .opblock.opblock-delete .opblock-summary-method {
+  background: #e01d1e; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,11 @@
+parameters:
+    default_locale: '%env(DEFAULT_LOCALE)%'
+    default_culture: '%env(DEFAULT_CULTURE)%'
+    api.host: '%env(API_DOC_HOST)%'
+    app.composer.home: '%env(COMPOSER_HOME)%'
+    app.version: '%env(APP_VERSION)%'
+    api.version: '%env(APP_API_VERSION)%'
+    app.languages: [en, fr]
+    app.plugins.enabled: ['twig/twig']
+    app.mailer.sender.address: noreply@example.com
+    app.mailer.sender.name: 'sf-parc Plateform'

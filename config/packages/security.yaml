@@ -1,0 +1,40 @@
+security:
+    enable_authenticator_manager: true
+#    encoders:
+#        App\Document\Security\User:
+#            algorithm: auto
+
+    providers:
+        jwt:
+            lexik_jwt: ~
+        login.user_provider:
+            id: App\Security\UserProvider    
+
+    firewalls:
+        public:
+            pattern: ^/
+            security: false
+#        login:
+#            login_throttling:
+#                max_attempts: 3
+#            pattern:  ^/login
+#            stateless: true
+#            anonymous: true
+#            provider: login.user_provider
+#            json_login:
+#                check_path: /login/check
+#                success_handler: lexik_jwt_authentication.handler.authentication_success
+#                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+#        api:
+#            pattern:   ^/
+#            stateless: true
+#            anonymous: false
+#            logout: ~
+#            provider: jwt
+#            guard:
+#                authenticators:
+#                    - app.jwt.authenticator
+    access_control:
+        - { path: '^/doc', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: '^/', roles: IS_AUTHENTICATED_FULLY, requires_channel: https }

@@ -1,0 +1,93 @@
+framework:
+    workflows:
+        enabled: true
+        appliance_status:
+            type: 'workflow'
+            metadata:
+                description: description of appliance status
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'status'
+            supports:
+                - App\Model\Hardware\Device
+            initial_marking: in_use
+            places:
+                in_use:
+                    metadata:
+                        label: In function
+                        description: The appliance is currently being used
+                spare:
+                    metadata:
+                        label: Spare
+                        description: The appliance is stored or not in use yet
+                under_repair:
+                    metadata:
+                        label: Under repair
+                        description: The appliance is currently being fixed
+                waste:
+                    metadata:
+                        label: Waste
+                        description: The appliance has been permanently removed
+                destructed:
+                    metadata:
+                        label: Destruction
+                        description: The appliance has been destroyed or recycled
+            transitions:
+                use:
+                    from: spare
+                    to:   in_use
+                    metadata:
+                        label: Use
+                        description: Back in use
+                stand-by:
+                    from: in_use
+                    to:   spare
+                    metadata:
+                        label: Stand-by
+                        description: The appliance is stored
+                repair:
+                    from: in_use
+                    to:   under_repair
+                    metadata:
+                        label: Repair
+                        description: Repair to be made
+                remove:
+                    from: in_use
+                    to:   waste
+                    metadata:
+                        label: Remove
+                        description: Remove because of malfunction, replacement(obsolete) or suppression
+                fix:
+                    from: under_repair
+                    to:   in_use
+                    metadata:
+                        label: Fix
+                        description: Repair has been made and back in function
+                unrepairable:
+                    from: under_repair
+                    to:   waste
+                    metadata:
+                        label: Unrepairable
+                        description: Cannot be fixed
+                destuct:
+                    from: in_use
+                    to:   destructed
+                    metadata:
+                        label: Destuct
+                        description: Directly destructed
+                dump:
+                    from: waste
+                    to:   destructed
+                    metadata:
+                        label: Dump
+                        description: Permanently remove from waste storage
+                dispose:
+                    from: spare
+                    to:   destructed
+                    metadata:
+                        label: Dispose
+                        description: Permanently remove from spare storage
+##            events_to_dispatch: ['workflow.leave', 'workflow.completed'] # you can pass one or more event names
+##            events_to_dispatch: [] # pass an empty array to not dispatch any event
