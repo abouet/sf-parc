@@ -1,0 +1,16 @@
+{% extends '@!NelmioApiDoc/SwaggerUi/index.html.twig' %}
+{% block meta %}
+    {{ parent() }}
+    <link rel="shortcut icon" href="{{ asset('/images/favicon-16x16.png') }}" sizes="16x16"/>
+    <link rel="shortcut icon" href="{{ asset('/images/favicon-32x32.png') }}" sizes="32x32"/>
+    <link rel="shortcut icon" type="image/svg+xml" href="{{ asset('/img/icon.svg') }}"/>
+{% endblock meta %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock stylesheets %}
+{% block header %}
+    <div id="logo">
+      <img src="{{ asset('images/logo.svg') }}" alt="Logo sf-parc" title="API REST sf-parc">
+    </div>
+{% endblock header %}

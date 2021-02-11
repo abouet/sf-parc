@@ -1,0 +1,9 @@
+app_doc_json:
+    path: /doc/{area}.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger, area: default }
+
+app_doc_ui:
+    path: /doc/{area}
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui, area: default }

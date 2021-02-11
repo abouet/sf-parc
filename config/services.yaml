@@ -1,0 +1,61 @@
+services:
+
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/' #TODO: supprimer
+            - '../src/Model/'
+            - '../src/Document/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+    app.jwt.authenticator:
+        public: false
+        parent: lexik_jwt_authentication.security.guard.jwt_token_authenticator
+        class: App\Security\TokenAuthenticator
+        arguments: ['@security.firewall.map']
+
+    app.jwt.listener:
+        class: App\EventListener\GetJWTListener
+        tags: 
+            - { name: 'monolog.logger', channel: 'security' }
+        arguments:
+            - '@security.token_storage'
+            - '@security.authentication.manager'
+            - ~
+            - '@lexik_jwt_authentication.handler.authentication_success'
+            - '@lexik_jwt_authentication.handler.authentication_failure'
+            - ~
+            - '@logger'
+            
+    App\Loader\ApiRouting:
+        tags: 
+            - { name: 'routing.route_loader' }
+        arguments:
+            - '%kernel.project_dir%/src'
+           
+    app.appliance_status:
+        class: App\Service\ApplianceStatusService
+        arguments:
+            - '@workflow.appliance_status'
+            - '@workflow.appliance_status.definition'
+            
+    app.converter.request.model:
+        class: App\Util\ModelParamConverter
+        tags:
+            - { name: 'request.param_converter', converter: 'model',  priority: '50' }
+            
+    app.composer.application:
+        class: App\Util\Composer\Composer
+        arguments:
+            - '%app.composer.home%'
+            - '%kernel.project_dir%'
